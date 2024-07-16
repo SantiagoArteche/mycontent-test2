@@ -9,7 +9,7 @@ export const LeadForm = () => {
   const { lead, handleLead } = useContext(LeadContext);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/schedules`)
+    fetch(`https://back-mycontent-test.vercel.app/api/schedules`)
       .then((res) => res.json())
       .then((data) => handleLead(data[1]));
   }, []);
@@ -35,7 +35,7 @@ export const LeadForm = () => {
       if (state === "Sin estado") state = "Lose";
 
       const response = await fetch(
-        `http://localhost:8000/api/schedules/lead/${lead[1]}`,
+        `https://back-mycontent-test.vercel.app/api/schedules/lead/${lead[1]}`,
         {
           method: "PUT",
           headers: {

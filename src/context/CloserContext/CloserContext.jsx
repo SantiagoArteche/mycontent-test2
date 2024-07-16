@@ -10,7 +10,7 @@ export const CloserProvider = ({ children }) => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:8000/api/schedules/${closer[0].toUpperCase()}${closer.slice(
+      `https://back-mycontent-test.vercel.app/api/schedules/${closer[0].toUpperCase()}${closer.slice(
         1,
         closer.length
       )}`
