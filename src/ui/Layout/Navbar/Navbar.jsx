@@ -4,8 +4,11 @@ import {
   IoNotificationsCircle,
 } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
+import { useContext } from "react";
+import { CloserContext } from "../../../context/CloserContext/CloserContext";
 
 export const Navbar = () => {
+  const { handleCloser, closer } = useContext(CloserContext);
   return (
     <div className="bg-[#5e2d76] flex items-center text-white p-4 gap-5 w-full">
       <h1 className="text-lg font-semibold min-w-[240px] w-[10%]">
@@ -19,7 +22,14 @@ export const Navbar = () => {
         </div>
         <div className="flex gap-5">
           <button>
-            <IoRefresh size={25} />
+            <IoRefresh
+              size={25}
+              onClick={() =>
+                closer === "Juanjo"
+                  ? handleCloser("juanjo")
+                  : handleCloser("Juanjo")
+              }
+            />
           </button>
           <button className="flex items-center gap-1">
             <IoHelpCircleOutline size={25} /> <p>Help</p>

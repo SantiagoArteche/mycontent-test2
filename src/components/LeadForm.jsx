@@ -9,7 +9,7 @@ export const LeadForm = () => {
   const { lead, handleLead } = useContext(LeadContext);
 
   useEffect(() => {
-    fetch(`https://back-mycontent-test.vercel.app/api/schedules`)
+    fetch(`http://localhost:8000/api/schedules`)
       .then((res) => res.json())
       .then((data) => handleLead(data[1]));
   }, []);
@@ -17,25 +17,25 @@ export const LeadForm = () => {
   useEffect(() => {
     setFormikState({
       values: {
-        call: lead[9],
-        state: lead[8],
+        call: lead[9] || "",
+        state: lead[8] || "",
       },
     });
   }, [lead, handleLead]);
 
   const { handleSubmit, getFieldProps, setFormikState } = useFormik({
     initialValues: {
-      state: lead[8] ?? "",
-      call: lead[9] ?? "",
+      state: lead[8] ?? "Lose",
+      call: lead[9] ?? "No",
     },
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async ({ call, state }) => {
       if (!call) call = "No";
-      if (!state) state = "Lose";
+      if (state === "Sin estado") state = "Lose";
 
       const response = await fetch(
-        `https://back-mycontent-test.vercel.app/api/schedules/lead/${lead[1]}`,
+        `http://localhost:8000/api/schedules/lead/${lead[1]}`,
         {
           method: "PUT",
           headers: {
@@ -78,7 +78,7 @@ export const LeadForm = () => {
     >
       <div className="flex gap-10 items-center">
         <h3>Closer (Usuario)</h3>
-        <h3>{closer}</h3>
+        <h3 className="capitalize">{closer}</h3>
       </div>
       <div className="flex gap-10 items-center">
         <h3>Teléfono (Usuario)</h3>

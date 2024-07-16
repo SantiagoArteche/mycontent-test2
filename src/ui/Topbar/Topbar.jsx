@@ -4,7 +4,6 @@ import { IoIosArrowUp } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { useContext } from "react";
 import { CloserContext } from "../../context/CloserContext/CloserContext";
-
 export const Topbar = () => {
   const { closer } = useContext(CloserContext);
 
@@ -22,7 +21,8 @@ export const Topbar = () => {
             <li className="flex gap-2 items-center">
               <FaUserCircle color="orange" size={20} />
               <p>
-                View as <span className="font-semibold">{closer}</span>
+                View as{" "}
+                <span className="font-semibold capitalize">{closer}</span>
               </p>
               <IoIosArrowDown />
             </li>

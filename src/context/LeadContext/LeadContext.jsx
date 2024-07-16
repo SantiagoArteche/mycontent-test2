@@ -9,6 +9,11 @@ export const LeadProvider = ({ children }) => {
     setLead(leadValue);
   };
 
+  if (!lead[8]) lead[8] = "Sin estado";
+  if (!lead[9]) lead[9] = "No";
+
+  lead[8];
+
   const data = { handleLead, lead };
 
   return <LeadContext.Provider value={data}>{children}</LeadContext.Provider>;

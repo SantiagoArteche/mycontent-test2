@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ViewContext } from "../../../context/ViewContext/ViewContext";
 import { TfiExchangeVertical } from "react-icons/tfi";
 import { IoFilter, IoSearchOutline } from "react-icons/io5";
@@ -8,20 +8,13 @@ import { LeadContext } from "../../../context/LeadContext/LeadContext";
 
 export const LeadDate = () => {
   const { select } = useContext(ViewContext);
-  const { closer } = useContext(CloserContext);
+  const { sheet } = useContext(CloserContext);
   const { handleLead } = useContext(LeadContext);
   const [show, setShow] = useState([]);
-  const [sheet, setSheet] = useState([]);
 
   const handleShow = (leadValue) => {
     show === leadValue ? setShow([]) : setShow(leadValue);
   };
-
-  useEffect(() => {
-    fetch(`https://back-mycontent-test.vercel.app/api/schedules/${closer}`)
-      .then((res) => res.json())
-      .then((data) => setSheet(data));
-  }, [closer]);
 
   return (
     <div className="col-span-3 p-3 border-r-2 hover:bg-blue-100 border-gray-300">
