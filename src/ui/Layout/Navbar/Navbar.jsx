@@ -23,6 +23,7 @@ export const Navbar = () => {
         <div className="flex gap-5">
           <button>
             <IoRefresh
+              className="hover:text-black"
               size={25}
               onClick={() =>
                 closer === "Juanjo"
