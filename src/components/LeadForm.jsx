@@ -24,7 +24,7 @@ export const LeadForm = () => {
         },
       });
   }, [lead]);
-  console.log(lead);
+  
   const { handleSubmit, getFieldProps, setFormikState } = useFormik({
     initialValues: {
       state: "Lose",
