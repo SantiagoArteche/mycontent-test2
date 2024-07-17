@@ -11,31 +11,31 @@ export const LeadForm = () => {
   useEffect(() => {
     fetch(`https://back-mycontent-test.vercel.app/api/schedules`)
       .then((res) => res.json())
-      .then((data) => handleLead(data[1]));
+      .then((data) => handleLead(data[1]))
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    setFormikState({
-      values: {
-        call: lead[9] || "",
-        state: lead[8] || "",
-      },
-    });
-  }, [lead, handleLead]);
-
+    lead &&
+      setFormikState({
+        values: {
+          call: lead?.call ?? "",
+          state: lead?.state ?? "",
+        },
+      });
+  }, [lead]);
+  console.log(lead);
   const { handleSubmit, getFieldProps, setFormikState } = useFormik({
     initialValues: {
-      state: lead[8] ?? "Lose",
-      call: lead[9] ?? "No",
+      state: "Lose",
+      call: "No",
     },
-    validateOnChange: true,
-    validateOnBlur: true,
+
     onSubmit: async ({ call, state }) => {
-      if (!call) call = "No";
       if (state === "Sin estado") state = "Lose";
 
       const response = await fetch(
-        `https://back-mycontent-test.vercel.app/api/schedules/lead/${lead[1]}`,
+        `https://back-mycontent-test.vercel.app/api/schedules/lead/${lead?.email}`,
         {
           method: "PUT",
           headers: {
@@ -97,22 +97,22 @@ export const LeadForm = () => {
         <h3>Enviar Mail</h3>
         <a
           className="py-1 px-2 rounded bg-blue-700 text-white"
-          href={`mailto:${lead[1]}`}
+          href={`mailto:${lead?.email}`}
         >
           Correo
         </a>
       </div>
       <div className="flex gap-10 items-center">
         <h3>UTM Source</h3>
-        <span className="">{lead[2]}</span>
+        <span className="">{lead?.source}</span>
       </div>
       <div className="flex gap-10 items-center">
         <h3>UTM Content</h3>
-        <span className="">{lead[6]}</span>
+        <span className="">{lead?.content}</span>
       </div>
       <div className="flex gap-10 items-center">
         <h3>Fecha de Agendación</h3>
-        <span className="">{lead[0]?.split("T")[0]}</span>
+        <span className="">{lead.fecha?.split("T")[0]}</span>
       </div>
       <div className="flex gap-10 items-center">
         <h3>Estado</h3>
@@ -123,32 +123,36 @@ export const LeadForm = () => {
           <option
             className="text-sm"
             value="Lose"
-            selected={lead[8] === "Lose"}
+            selected={lead?.state === "Lose"}
           >
             Lose
           </option>
           <option
             className="text-sm"
             value="Contactado"
-            selected={lead[8] === "Contactado"}
+            selected={lead?.state === "Contactado"}
           >
             Contactado
           </option>
           <option
             className="text-sm"
             value="Esperando respuesta"
-            selected={lead[8] === "Esperando respuesta"}
+            selected={lead?.state === "Esperando respuesta"}
           >
             Esperando respuesta
           </option>
           <option
             className="text-sm"
             value="En llamada"
-            selected={lead[8] === "En llamada"}
+            selected={lead?.state === "En llamada"}
           >
             En llamada
           </option>
-          <option className="text-sm" value="Win" selected={lead[8] == "Win"}>
+          <option
+            className="text-sm"
+            value="Win"
+            selected={lead?.state == "Win"}
+          >
             Win
           </option>
         </select>
@@ -159,10 +163,10 @@ export const LeadForm = () => {
           className="w-full max-w-[400px] p-1 border border-gray-300 rounded px-2"
           {...getFieldProps("call")}
         >
-          <option className="text-sm" value="No" selected={lead[9] === "No"}>
+          <option className="text-sm" value="No" selected={lead?.call === "No"}>
             No
           </option>
-          <option className="text-sm" value="Si" selected={lead[9] === "Si"}>
+          <option className="text-sm" value="Si" selected={lead?.call === "Si"}>
             Si
           </option>
         </select>
@@ -170,7 +174,7 @@ export const LeadForm = () => {
       <div className="flex gap-10 items-center">
         <h3>UTM Campaign</h3>
         <span className="">
-          <p className="px-3 text-smrounded-full p-1">{lead[3]}</p>
+          <p className="px-3 text-smrounded-full p-1">{lead?.campaign}</p>
         </span>
       </div>
       <div className="flex gap-10">

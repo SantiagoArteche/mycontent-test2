@@ -15,7 +15,6 @@ export const LeadDate = () => {
   const handleShow = (leadValue) => {
     show === leadValue ? setShow([]) : setShow(leadValue);
   };
-
   return (
     <div className="col-span-3 p-3 border-r-2 hover:bg-blue-100 border-gray-300">
       <h2 className="text-xl mb-5 font-semibold ms-5">{select}</h2>

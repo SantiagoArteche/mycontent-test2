@@ -6,13 +6,21 @@ export const LeadProvider = ({ children }) => {
   const [lead, setLead] = useState([]);
 
   const handleLead = (leadValue) => {
-    setLead(leadValue);
+    if (!leadValue[8]) leadValue[8] = "Sin estado";
+    if (!leadValue[9]) leadValue[9] = "No";
+    setLead({
+      fecha: leadValue[0],
+      email: leadValue[1],
+      source: leadValue[2],
+      campaign: leadValue[3],
+      medium: leadValue[4],
+      term: leadValue[5],
+      content: leadValue[6],
+      closer: leadValue[7],
+      state: leadValue[8],
+      call: leadValue[9],
+    });
   };
-
-  if (!lead[8]) lead[8] = "Sin estado";
-  if (!lead[9]) lead[9] = "No";
-
-  lead[8];
 
   const data = { handleLead, lead };
 

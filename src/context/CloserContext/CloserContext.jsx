@@ -16,8 +16,8 @@ export const CloserProvider = ({ children }) => {
       )}`
     )
       .then((res) => res.json())
-      .then((data) => setSheet(data));
-    console.log(3);
+      .then((data) => setSheet(data))
+      .catch((error) => console.log(error));
   }, [closer]);
 
   const data = { closer, handleCloser, sheet };

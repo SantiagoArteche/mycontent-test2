@@ -13,7 +13,7 @@ export const LeadView = () => {
         <IoIosArrowDown />
       </div>
       <h2 className="text-4xl mt-10 font-semibold hover:bg-blue-100 p-3 hover:rounded cursor-pointer">
-        {lead[1]}
+        {lead?.email}
       </h2>
       <hr />
       <LeadForm />
